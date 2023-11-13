@@ -1,0 +1,36 @@
+      <div class="col-md-3">
+        <h2>User info</h2>
+        <%= image_tag "no_image.jpg", size: "100x100" %>
+        <table class="table">
+          <tbody>
+            <tr></tr>
+            <tr>
+              <th>name</th>
+              <th><%= @book.user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <th></th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <%= link_to edit_book_path(:id), class: "btn btn-outline-secondary btn-block", method: :get do %>
+            <i class="fa-solid fa-user-gear"></i>
+          <% end %>
+        </div>
+        <h2 class="mt-3">New book</h2>
+        <form>
+          <div class="form-group">
+            <label class="book_title">Title</label>
+            <input class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label class="book_opinion">Opinion</label>
+            <textarea class="form-control book_body"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Create Book</button>
+          </div>
+        </form>
+      </div>
