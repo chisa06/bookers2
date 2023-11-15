@@ -6,15 +6,20 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @books = @user.books.page(params[:page])
+    @books = Book.page(params[:page])
   end
   
   def create
-    @user = User.find(params[:user_id])
-    @book = @user.books.build(book_params)
-    @book.save
-    redirect_to book_path(@book.id)
-    puts @book.errors.full_messages
+    @user = User.find(params[:id])
+    @book = Book.new(book_params)
+    @book.user = @user
+    
+    if @book.save
+     redirect_to book_path(@book.id)
+    else
+      @books = Book.page(params[:page])
+      render template: 'books/index' 
+    end
   end
 
   def edit
@@ -24,7 +29,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
+    @user.valid?
     redirect_to users_path(@user.id)
-    puts @book.errors.full_messages
   end
 end
