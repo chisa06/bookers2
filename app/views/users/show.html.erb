@@ -15,8 +15,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <% @books.each do |book| %>
+            <% @books.each do |book| %>
+              <tr>
                 <td>
                   <%= image_tag book.get_image, size: "80x80"%>
                 </td>
@@ -26,8 +26,8 @@
                 <td>
                   <%= book.body %>
                 </td>
-              <% end %>
-            </tr>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
