@@ -12,19 +12,35 @@ class BooksController < ApplicationController
       redirect_to books_path(@book.id)
     else
       @books = Book.page(params[:page])
-      render template: 'books/index' 
+      render template: 'books/index'
     end
   end
 
   def show
-    @book = Book.find(params[:id])
-    @book.user_id = current_user.id
-    @books = Book.where(id: @book.id).page(params[:page])
+       @book = Book.find(params[:id])
+    if @book.user_id == current_user.id
+       @books = Book.where(id: @book.id).page(params[:page])
+    else
+      redirect_to root_path
+    end
   end
 
   def edit
+      @book = Book.find_by(params[:id])
+      if @book.nil?
+      redirect_to edit_book_path(:id)
+    end
   end
-  
+
+  def update
+    book = Book.find(params[:id])
+    if book.update(book_params)
+       redirect_to book_path(book.id)
+    else
+      render template: 'books/edit'
+    end
+  end
+
   def destroy
     book = Book.find(params[:id])
     book.destroy
