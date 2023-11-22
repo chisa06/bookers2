@@ -24,6 +24,7 @@ class BooksController < ApplicationController
       @books = Book.where(id: @book.id).page(params[:page])
     end
   end
+  
 
   def edit
     @book = Book.find(params[:id])
