@@ -11,7 +11,11 @@
 </div> 
 <div class="col-md-3">
   <h2>User info</h2>
-  <%= image_tag "no_image.jpg", size: "100x100" %>
+  <% if @user.profile_image.attached? %>
+      <%= image_tag @user.get_profile_image( 100,100 ) %>
+  <% else %>
+      <%= image_tag 'no_image.jpg' %>
+  <% end %>
   <table class="table">
     <tbody>
       <tr></tr>
